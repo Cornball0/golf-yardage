@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luc's Yardage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: url('https://i.imgur.com/McOrZKY.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Set text color to white for better readability on the image */
+        }
+
+        .club-section {
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better text visibility */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Luc's Yardage Calculator</h1>
+
+    <!-- Function to add yardage and update UI -->
+    <script>
+        function addYardage(club) {
+            var yardageInput = document.getElementById('yardage-' + club);
+            var yardage = parseInt(yardageInput.value);
+
+            if (isNaN(yardage)) {
+                alert('Please enter a valid yardage.');
+                return;
+            }
+
+            // Retrieve existing data from localStorage
+            var yardages = JSON.parse(localStorage.getItem(club)) || [];
+
+            // Add new yardage
+            yardages.push(yardage);
+
+            // Sort yardages
+            yardages.sort(function(a, b) {
+                return b - a;
+            });
+
+            // Save the top 3 and lowest 3 yardages
+            var top3 = yardages.slice(0, 3);
+            var low3 = yardages.slice(-3);
+
+            localStorage.setItem(club, JSON.stringify(yardages));
+
+            // Update UI
+            document.getElementById('top3-' + club).innerHTML = formatList(top3);
+            document.getElementById('low3-' + club).innerHTML = formatList(low3);
+            document.getElementById('average-' + club).innerText = calculateAverage(yardages);
+        }
+
+        function formatList(items) {
+            return '<li>' + items.join('</li><li>') + '</li>';
+        }
+
+        function calculateAverage(yardages) {
+            var sum = yardages.reduce(function(a, b) {
+                return a + b;
+            }, 0);
+
+            var average = sum / yardages.length;
+
+            return isNaN(average) ? 'N/A' : average.toFixed(2);
+        }
+    </script>
+
+    <!-- 60 Degree -->
+    <div class="club-section">
+        <h2>60 Degree</h2>
+        <label for="yardage-60">Enter Yardage:</label>
+        <input type="number" id="yardage-60">
+        <button onclick="addYardage('60')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-60"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-60"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-60">N/A</p>
+    </div>
+
+    <!-- 54 Degree -->
+    <div class="club-section">
+        <h2>54 Degree</h2>
+        <label for="yardage-54">Enter Yardage:</label>
+        <input type="number" id="yardage-54">
+        <button onclick="addYardage('54')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-54"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-54"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-54">N/A</p>
+    </div>
+    <!-- Pitching Wedge -->
+    <div class="club-section">
+        <h2>Pitching Wedge</h2>
+        <label for="yardage-pw">Enter Yardage:</label>
+        <input type="number" id="yardage-pw">
+        <button onclick="addYardage('pw')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-pw"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-pw"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-pw">N/A</p>
+    </div>
+
+    <!-- 8 Iron -->
+    <div class="club-section">
+        <h2>8 Iron</h2>
+        <label for="yardage-8i">Enter Yardage:</label>
+        <input type="number" id="yardage-8i">
+        <button onclick="addYardage('8i')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-8i"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-8i"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-8i">N/A</p>
+    </div>
+
+    <!-- 7 Iron -->
+    <div class="club-section">
+        <h2>7 Iron</h2>
+        <label for="yardage-7i">Enter Yardage:</label>
+        <input type="number" id="yardage-7i">
+        <button onclick="addYardage('7i')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-7i"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-7i"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-7i">N/A</p>
+    </div>
+
+    <!-- 6 Iron -->
+    <div class="club-section">
+        <h2>6 Iron</h2>
+        <label for="yardage-6i">Enter Yardage:</label>
+        <input type="number" id="yardage-6i">
+        <button onclick="addYardage('6i')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-6i"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-6i"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-6i">N/A</p>
+    </div>
+
+    <!-- 4 Iron -->
+    <div class="club-section">
+        <h2>4 Iron</h2>
+        <label for="yardage-4i">Enter Yardage:</label>
+        <input type="number" id="yardage-4i">
+        <button onclick="addYardage('4i')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-4i"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-4i"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-4i">N/A</p>
+    </div>
+
+    <!-- 2 Iron -->
+    <div class="club-section">
+        <h2>2 Iron</h2>
+        <label for="yardage-2i">Enter Yardage:</label>
+        <input type="number" id="yardage-2i">
+        <button onclick="addYardage('2i')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-2i"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-2i"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-2i">N/A</p>
+    </div>
+
+    <!-- Hybrid -->
+    <div class="club-section">
+        <h2>Hybrid</h2>
+        <label for="yardage-hybrid">Enter Yardage:</label>
+        <input type="number" id="yardage-hybrid">
+        <button onclick="addYardage('hybrid')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-hybrid"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-hybrid"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-hybrid">N/A</p>
+    </div>
+
+    <!-- 3 Wood -->
+    <div class="club-section">
+        <h2>3 Wood</h2>
+        <label for="yardage-3w">Enter Yardage:</label>
+        <input type="number" id="yardage-3w">
+        <button onclick="addYardage('3w')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-3w"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-3w"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-3w">N/A</p>
+    </div>
+
+    <!-- Driver -->
+    <div class="club-section">
+        <h2>Driver</h2>
+        <label for="yardage-driver">Enter Yardage:</label>
+        <input type="number" id="yardage-driver">
+        <button onclick="addYardage('driver')">Add Yardage</button>
+
+        <h3>Top 3 Farthest Yardages:</h3>
+        <ul id="top3-driver"></ul>
+
+        <h3>Lowest 3 Yardages:</h3>
+        <ul id="low3-driver"></ul>
+
+        <h3>Average Yardage:</h3>
+        <p id="average-driver">N/A</p>
+    </div>
+
+    <script>
+        // Include the JavaScript code as provided in the previous response
+    </script>
+</body>
+</html>
